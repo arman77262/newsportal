@@ -70,5 +70,7 @@ Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubcate
 Route::get('/get/subdistrict/{district_id}', [PostController::class, 'getSubdsitrict']);
 
 //Admin All Post Route
+Route::get('/all/post', [PostController::class, 'index'])->name('allpost');
 Route::get('/add/post', [PostController::class, 'AddPost'])->name('addpost');
 Route::post('/store/post', [PostController::class, 'StorePost'])->name('store.post');
+Route::get('/edit/post/{id}', [PostController::class, 'EditPost'])->name('edit.post');

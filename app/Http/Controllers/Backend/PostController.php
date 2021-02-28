@@ -10,6 +10,21 @@ use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
+
+
+    public function index(){
+        $posts = DB::table('posts')
+            ->join('categories', 'posts.category_id', 'categories.id')
+            ->join('subcategories', 'posts.subcategory_id', 'subcategories.id')
+            ->join('districts', 'posts.district_id', 'districts.id')
+            ->join('subdistricts', 'posts.subdistrict_id', 'subdistricts.id')
+            ->select('posts.*', 'categories.category_en', 'subcategories.subcategory_en', 'districts.district_en', 'subdistricts.subdistrict_en')
+            ->orderBy('id', 'desc')->paginate(3);
+
+            return view('backend.post.index', compact('posts'));
+    }
+
+
     public function AddPost(){
         $category = DB::table('categories')->get();
         $district = DB::table('districts')->get();
@@ -69,10 +84,18 @@ class PostController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('addpost')->with($notification);
+            return redirect()->route('allpost')->with($notification);
         }else{
             return redirect()->back();
         }
 
+    }
+
+    public function EditPost($id){
+        $post = DB::table('posts')->where('id', $id)->first();
+        $category = DB::table('categories')->get();
+        $district = DB::table('districts')->get();
+
+        return view('backend.post.edit', compact('post', 'category', 'district'));
     }
 }
