@@ -48,7 +48,7 @@
                 <td>{{ Carbon\Carbon::parse($post->post_date)->diffforHumans() }}</td>
                 <td>
                     <a href="{{route('edit.post',$post->id)}}" class="btn btn-info btn-sm">Edit</a>
-                    <a href="{{-- {{route('delete.category',$cat->id)}} --}}" onclick="return confirm('Are You Sure Want To Delete ?')" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{{route('delete.post',$post->id)}}" onclick="return confirm('Are You Sure Want To Delete ?')" class="btn btn-danger btn-sm">Delete</a>
                 </td>
               </tr>
                 @endforeach

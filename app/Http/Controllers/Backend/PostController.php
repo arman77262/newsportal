@@ -98,4 +98,62 @@ class PostController extends Controller
 
         return view('backend.post.edit', compact('post', 'category', 'district'));
     }
+
+    public function UpdatePost(Request $request, $id){
+        $data = array();
+
+        $data['title_en'] = $request->title_en;
+        $data['title_hin'] = $request->title_hin;
+        $data['user_id'] = Auth::id();
+        $data['category_id'] = $request->category_id;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['district_id'] = $request->district_id;
+        $data['subdistrict_id'] = $request->subdistrict_id;
+        $data['tags_en'] = $request->tags_en;
+        $data['tags_hin'] = $request->tags_hin;
+        $data['details_en'] = $request->details_en;
+        $data['details_hin'] = $request->details_hin;
+        $data['headline'] = $request->headline;
+        $data['big_thumbnail'] = $request->big_thumbnail;
+        $data['first_section'] = $request->first_section;
+        $data['first_section_thumbnail'] = $request->first_section_thumbnail;
+
+
+        $oldimage = $request->oldimage;
+        $image = $request->image;
+        if($image){
+            $one_image = uniqid().'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(500,300)->save('images/postimg/'.$one_image);
+            $data['image'] = 'images/postimg/'.$one_image;
+            DB::table('posts')->where('id', $id)->update($data);
+            unlink($oldimage);
+
+            $notification = array(
+                'message' => 'Post Updated successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('allpost')->with($notification);
+        }else{
+            $data['image'] = $oldimage;
+            DB::table('posts')->where('id', $id)->update($data);
+
+            $notification = array(
+                'message' => 'Post Updated successfully',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('allpost')->with($notification);
+        }
+    }
+
+    public function DeletePost($id){
+        $post = DB::table('posts')->where('id', $id)->first();
+        unlink($post->image);
+        DB::table('posts')->where('id', $id)->delete();
+        $notification = array(
+            'message' => 'Post Delete successfully',
+            'alert-type' => 'error'
+        );
+        return redirect()->route('allpost')->with($notification);
+    }
 }

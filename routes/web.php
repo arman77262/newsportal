@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use Illuminate\Support\Facades\Route;
@@ -74,3 +75,12 @@ Route::get('/all/post', [PostController::class, 'index'])->name('allpost');
 Route::get('/add/post', [PostController::class, 'AddPost'])->name('addpost');
 Route::post('/store/post', [PostController::class, 'StorePost'])->name('store.post');
 Route::get('/edit/post/{id}', [PostController::class, 'EditPost'])->name('edit.post');
+Route::post('/update/post/{id}', [PostController::class, 'UpdatePost'])->name('update.post');
+Route::get('/delete/post/{id}', [PostController::class, 'DeletePost'])->name('delete.post');
+
+//social setting route
+Route::get('/social/setting', [SettingController::class, 'SocialSetting'])->name('social.setting');
+Route::post('/social/update/{id}', [SettingController::class, 'Socialupdate'])->name('update.social');
+
+//seo setting route will go here
+Route::get('/seo/setting', [SettingController::class, 'SeoSetting'])->name('seo.setting');

@@ -13,7 +13,7 @@
       <div class="card-body">
         <h4 class="card-title">Post Edit Form</h4>
         <p class="card-description"> Basic form elements </p>
-        <form class="forms-sample" action="{{route('store.post')}}" method="POST" enctype="multipart/form-data">
+        <form class="forms-sample" action="{{route('update.post',$post->id)}}" method="POST" enctype="multipart/form-data">
 
           @csrf
 
@@ -87,19 +87,6 @@
                     </select>
                   </div>
             </div>
-
-
-            <div class="form-group">
-                <label>New Image upload</label>
-                <input type="file" name="image" class="file-upload-default">
-                <div class="input-group col-xs-12">
-                  <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
-                  <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                  </span>
-                </div>
-            </div>
-
 
 
             <div class="row">
