@@ -131,6 +131,9 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('seo.setting')}}"> SEO Setting </a></li>
           </ul>
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('prayer.setting')}}"> Prayer Setting </a></li>
+          </ul>
         </div>
       </li>
 
