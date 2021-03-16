@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller
 {
+
+    //social setting
     public function SocialSetting(){
         $social = DB::table('socials')->first();
         return view('backend.setting.social',compact('social'));
@@ -31,7 +33,10 @@ class SettingController extends Controller
 
         return redirect()->route('social.setting')->with($notification);
     }
+    //social setting
 
+
+    //SEO setting
     public function SeoSetting(){
         $seo = DB::table('seos')->first();
         return view('backend.setting.seo', compact('seo'));
@@ -57,6 +62,9 @@ class SettingController extends Controller
 
         return redirect()->route('seo.setting')->with($notification);
     }
+    //SEO setting
+
+    //Prayer Setting
 
     public function PrayerSetting(){
         $pray = DB::table('prayers')->first();
@@ -82,4 +90,50 @@ class SettingController extends Controller
 
         return redirect()->route('prayer.setting')->with($notification);
     }
+
+    //Prayer Setting
+
+
+    //Live Tv Setting
+    public function LiveTvSetting(){
+        $tv = DB::table('livetvs')->first();
+        return view('backend.setting.livetv',compact('tv'));
+    }
+
+    public function LiveTvUpdate(Request $request, $id){
+        $data = array();
+
+        $data['embed_code'] = $request->embed_code;
+
+        DB::table('livetvs')->where('id', $id)->update($data);
+
+        $notification = array(
+            'message' => 'Live Tv Update successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('livetv.setting')->with($notification);
+    }
+
+    public function LiveTvDeactive(Request $request, $id){
+        DB::table('livetvs')->where('id', $id)->update(['status'=>0]);
+        $notification = array(
+            'message' => 'Live Tv Deactive successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function LiveTvActive(Request $request, $id){
+        DB::table('livetvs')->where('id', $id)->update(['status'=>1]);
+        $notification = array(
+            'message' => 'Live Tv Active successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    //Live Tv Setting
+
 }
