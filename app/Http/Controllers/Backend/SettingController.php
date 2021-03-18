@@ -136,4 +136,47 @@ class SettingController extends Controller
     }
     //Live Tv Setting
 
+
+    //Notice Setting
+    public function NoticeSetting(){
+        $notice = DB::table('notices')->first();
+        return view('backend.setting.notice', compact('notice'));
+    }
+
+    public function NoticeUpdate(Request $request, $id){
+        $data = array();
+
+        $data['notice'] = $request->notice;
+
+        DB::table('notices')->where('id', $id)->update($data);
+
+        $notification = array(
+            'message' => 'Notice Update successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('notice.setting')->with($notification);
+    }
+
+    public function NoticeDeactive(Request $request, $id){
+        DB::table('notices')->where('id', $id)->update(['status'=>0]);
+        $notification = array(
+            'message' => 'Notice Deactive successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function NoticeActive(Request $request, $id){
+        DB::table('notices')->where('id', $id)->update(['status'=>1]);
+        $notification = array(
+            'message' => 'Notice Active successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    //Notice Setting
+
 }

@@ -137,6 +137,9 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('livetv.setting')}}"> Live Tv Setting </a></li>
           </ul>
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('notice.setting')}}"> Notice Setting </a></li>
+          </ul>
         </div>
       </li>
 
