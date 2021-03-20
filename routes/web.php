@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
+use App\Http\Controllers\Backend\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,3 +103,12 @@ Route::get('/notice/setting', [SettingController::class, 'NoticeSetting'])->name
 Route::post('/notice/update/{id}', [SettingController::class, 'NoticeUpdate'])->name('update.notice');
 Route::get('/notice/deactive/{id}', [SettingController::class, 'NoticeDeactive'])->name('deactive.notice');
 Route::get('/notice/active/{id}', [SettingController::class, 'NoticeActive'])->name('active.notice');
+
+//Website All Route
+Route::get('/website/links', [WebsiteController::class, 'index'])->name('website.link');
+Route::get('/website/add', [WebsiteController::class, 'AddLink'])->name('add.website');
+Route::post('/website/store', [WebsiteController::class, 'StoreLink'])->name('store.website');
+Route::get('/website/edit/{id}', [WebsiteController::class, 'EditLink'])->name('edit.link');
+Route::post('/website/update/{id}', [WebsiteController::class, 'UpdateLink'])->name('update.website');
+Route::get('/website/delete/{id}', [WebsiteController::class, 'DeleteLink'])->name('delete.link');
+
