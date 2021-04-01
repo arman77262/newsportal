@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -112,3 +113,9 @@ Route::get('/website/edit/{id}', [WebsiteController::class, 'EditLink'])->name('
 Route::post('/website/update/{id}', [WebsiteController::class, 'UpdateLink'])->name('update.website');
 Route::get('/website/delete/{id}', [WebsiteController::class, 'DeleteLink'])->name('delete.link');
 
+//gallery route
+Route::get('/photo/gallery', [GalleryController::class, 'PhotoGallery'])->name('photo.gallery');
+Route::get('/add/photo', [GalleryController::class, 'AddPhoto'])->name('add.photo');
+Route::post('/store/photo', [GalleryController::class, 'StorePhoto'])->name('store.photo');
+Route::get('/edit/photo/{id}', [GalleryController::class, 'EditPhoto'])->name('edit.photo');
+Route::post('/update/photo/{id}', [GalleryController::class, 'UpdatePhoto'])->name('update.photo');
