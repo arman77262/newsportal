@@ -159,7 +159,9 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('photo.gallery')}}"> Photo Gallery </a></li>
           </ul>
-
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('video.gallery')}}"> Video Gallery </a></li>
+          </ul>
         </div>
       </li>
 

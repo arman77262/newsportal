@@ -42,7 +42,7 @@
                     <option value="0">Small Photo</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mr-2">Post News</button>
+            <button type="submit" class="btn btn-primary mr-2">Post Photo</button>
 
             </div> {{-- End Row --}}
 
