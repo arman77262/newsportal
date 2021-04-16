@@ -51,14 +51,6 @@ class SubCategoryController extends Controller
     }
 
     public function UpdateSubcat(Request $request, $id){
-        $validated = $request->validate([
-            'subcategory_en' => 'required|unique:subcategories|max:255',
-            'subcategory_hin' => 'required|unique:subcategories|max:255',
-        ],[
-            'subcategory_en.required'=> 'Please Insert English Category Name',
-            'subcategory_hin.required'=> 'Please Insert Hindi Category Name',
-        ]);
-
         $data = array();
         $data['category_id'] = $request->category_id;
         $data['subcategory_en'] = $request->subcategory_en;

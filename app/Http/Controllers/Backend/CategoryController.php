@@ -49,14 +49,6 @@ class CategoryController extends Controller
     }
 
     public function UpdateCategory(Request $request, $id){
-        $validated = $request->validate([
-            'category_en' => 'required|unique:categories|max:255',
-            'category_hin' => 'required|unique:categories|max:255',
-        ],[
-            'category_en.required'=> 'Please Insert English Category Name',
-            'category_hin.required'=> 'Please Insert Hindi Category Name',
-        ]);
-
         $data = array();
 
         $data['category_en'] = $request->category_en;

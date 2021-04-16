@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <textarea class="form-control" name="embed_code" id="summernote1" rows="4">{{$tv->embed_code}}</textarea>
+                <textarea class="form-control" name="embed_code" id="summernoteLive" rows="4">{{$tv->embed_code}}</textarea>
             </div>
 
           <button type="submit" class="btn btn-primary mr-2">Update Prayer</button>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\WebsiteController;
+use App\Http\Controllers\Frontend\ExtraController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('main.home');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -129,3 +130,6 @@ Route::get('/edit/video/{id}', [GalleryController::class, 'EditVideo'])->name('e
 Route::post('/update/video/{id}', [GalleryController::class, 'UpdateVideo'])->name('update.video');
 Route::get('/delete/video/{id}', [GalleryController::class, 'DeleteVideo'])->name('delete.video');
 
+//Frontend
+Route::get('/lang/hindi', [ExtraController::class, 'Hindi'])->name('lang.hindi');
+Route::get('/lang/english', [ExtraController::class, 'English'])->name('lang.english');
