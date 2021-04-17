@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <textarea class="form-control" name="notice" id="summernote1" rows="4">{{$notice->notice}}</textarea>
+                <textarea class="form-control" name="notice" id="notice" rows="4">{{$notice->notice}}</textarea>
             </div>
 
           <button type="submit" class="btn btn-primary mr-2">Update Notice</button>

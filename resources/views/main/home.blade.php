@@ -3,20 +3,7 @@
 
 
 
-<!-- notice-start -->
 
-<section>
-    <div class="container-fluid">
-        <div class="row scroll">
-            <div class="col-md-2 col-sm-3 scroll_01 ">
-                Breaking News :
-            </div>
-            <div class="col-md-10 col-sm-9 scroll_02">
-                <marquee>wellcome to our website...</marquee>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- 1st-news-section-start -->
 <section class="news-section">

@@ -152,3 +152,64 @@
         </div>
     </div>
 </section><!-- /.date-close -->
+
+
+<!-- notice-start -->
+
+<?php
+    $headline = DB::table('posts')->where('posts.headline',1)->limit(3)->get();
+?>
+
+<section>
+    <div class="container-fluid">
+        <div class="row scroll">
+            <div class="col-md-2 col-sm-3 scroll_01 ">
+                @if (session()->get('lang')=='english')
+                Breaking News :
+                @else
+                आज की ताजा खबर :
+                @endif
+
+            </div>
+            <div class="col-md-10 col-sm-9 scroll_02">
+                <marquee>
+                    @foreach ($headline as $item)
+                     @if (session()->get('lang')=='english')
+                     |        {{$item->title_en}}
+                     @else
+                     |        {{$item->title_hin}}
+                     @endif
+                    @endforeach
+                </marquee>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{{-- Notice --}}
+<?php
+    $notice = DB::table('notices')->first();
+?>
+
+@if ($notice->status == 1)
+<section>
+    <div class="container-fluid">
+        <div class="row scroll">
+            <div class="col-md-2 col-sm-3 scroll_01 " style="background-color: green;">
+                @if (session()->get('lang')=='english')
+                Notice :
+                @else
+                सूचना :
+                @endif
+
+            </div>
+            <div class="col-md-10 col-sm-9 scroll_02" style="background-color: red;">
+                <marquee>
+                    {{$notice->notice}}
+                </marquee>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
