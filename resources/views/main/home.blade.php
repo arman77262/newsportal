@@ -1,7 +1,11 @@
 @extends('main.home_master');
 @section('content')
 
+@php
+    $firstSecThumb = DB::table('posts')->where('first_section_thumbnail',1)->orderBy('id','desc')->first();
 
+    $first_section  = DB::table('posts')->where('first_section',1)->orderBy('id','desc')->limit(8)->get();
+@endphp
 
 
 
@@ -14,63 +18,37 @@
                     <div class="col-md-1 col-sm-1 col-lg-1"></div>
                     <div class="col-md-10 col-sm-10">
                         <div class="lead-news">
- <div class="service-img"><a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" width="800px" alt="Notebook"></a></div>
+ <div class="service-img"><a href="#"><img src="{{asset($firstSecThumb->image)}}" width="800px" alt="Notebook"></a></div>
                             <div class="content">
-     <h4 class="lead-heading-01"><a href="#">Modi invited to join March 26 prog in person</a> </h4>
+     <h4 class="lead-heading-01"><a href="#">
+        @if (session()->get('lang')=='english')
+            {{$firstSecThumb->title_en}}
+            @else
+            {{$firstSecThumb->title_hin}}
+        @endif
+    </a> </h4>
                             </div>
                         </div>
                     </div>
 
                 </div>
                     <div class="row">
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a> </h4>
-                                </div>
+                        @foreach ($first_section as $row)
+                        <div class="col-md-3 col-sm-3">
+                            <div class="top-news">
+                                <a href="#"><img src="{{asset($row->image)}}" alt="Notebook"></a>
+                                <h4 class="heading-02"><a href="#">
+                                @if (session()->get('lang')=='english')
+                                    {{$row->title_en}}
+                                @else
+                                    {{$row->title_hin}}
+                                @endif
+                                </a> </h4>
                             </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a> </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a> </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a> </h4>
-                                </div>
-                            </div>
-                                <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">Bangladesh sees 14 more deaths, 1274 fresh cases</a> </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">FFs’ monthly honorarium to be raised Tk 20,000</a> </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a> </h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-3">
-                                <div class="top-news">
-                                    <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                    <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a> </h4>
-                                </div>
-                            </div>
+                        </div>
+                        @endforeach
+
+
                         </div>
 
                 <!-- add-start -->
@@ -81,49 +59,120 @@
                 </div><!-- /.add-close -->
 
                 <!-- news-start -->
+
+
+                @php
+
+                    $category = DB::table('categories')->first();
+
+                    $generalThumb = DB::table('posts')->where('category_id', $category->id)->where('big_thumbnail',1)->orderBy('id','desc')->first();
+
+                    $generalThumbSmall = DB::table('posts')->where('category_id', $category->id)->where('big_thumbnail',NULL)->limit(2)->get();
+                @endphp
+
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="bg-one">
-                            <div class="cetagory-title"><a href="#">National <span>More <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></a></div>
+                            <div class="cetagory-title">
+                                <a href="#">
+                                    @if (session()->get('lang')=='english')
+                                    {{$category->category_en}}
+                                    @else
+                                    {{$category->category_hin}}
+                                    @endif
+                                     <span>
+                                        @if (session()->get('lang')=='english')
+                                        More
+                                        @else
+                                        अधिक
+                                        @endif
+                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></a></div>
                             <div class="row">
+
+
                                 <div class="col-md-6 col-sm-6">
                                     <div class="top-news">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-02"><a href="#">Dhaka ranks worst in air quality index</a> </h4>
+                                        <a href="#"><img src="{{asset($generalThumb->image)}}" alt="Notebook"></a>
+                                        <h4 class="heading-02"><a href="#">
+                                        @if (session()->get('lang')=='english')
+                                            {{Str::limit($generalThumb->title_en,40)}}
+                                        @else
+                                            {{Str::limit($generalThumb->title_hin,40)}}
+                                        @endif
+                                        </a> </h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+                                    @foreach ($generalThumbSmall as $row)
                                     <div class="image-title">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Dhaka ranks worst in air quality index</a> </h4>
+                                        <a href="#"><img src="{{asset($row->image)}}" alt="Notebook"></a>
+                                        <h4 class="heading-03"><a href="#">
+                                            @if (session()->get('lang')=='english')
+                                            {{Str::limit($row->title_en,40)}}
+                                            @else
+                                            {{Str::limit($row->title_hin,40)}}
+                                            @endif
+                                        </a> </h4>
                                     </div>
-                                    <div class="image-title">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Dhaka ranks worst in air quality index</a> </h4>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+                    @php
+
+                    $scategory = DB::table('categories')->skip(1)->first();
+
+                    $sgeneralThumb = DB::table('posts')->where('category_id', $scategory->id)->where('big_thumbnail',1)->orderBy('id','desc')->first();
+
+                    $sgeneralThumbSmall = DB::table('posts')->where('category_id', $scategory->id)->where('big_thumbnail',NULL)->limit(2)->get();
+                    @endphp
+
                     <div class="col-md-6 col-sm-6">
                         <div class="bg-one">
-                            <div class="cetagory-title"><a href="#">Sports<span>More <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></a></div>
+                            <div class="cetagory-title"><a href="#">
+                                @if (session()->get('lang')=='english')
+                                    {{$scategory->category_en}}
+                                    @else
+                                    {{$scategory->category_hin}}
+                                    @endif
+                                <span>
+                                    @if (session()->get('lang')=='english')
+                                        More
+                                        @else
+                                        अधिक
+                                        @endif
+                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i></span></a></div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="top-news">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-02"><a href="#">Germany claim first Nations League win</a> </h4>
+                                        <a href="#"><img src="{{asset($sgeneralThumb->image)}}" alt="Notebook"></a>
+                                        <h4 class="heading-02"><a href="#">
+                                            @if (session()->get('lang')=='english')
+                                            {{Str::limit($sgeneralThumb->title_en,40)}}
+                                        @else
+                                            {{Str::limit($sgeneralThumb->title_hin,40)}}
+                                        @endif
+                                        </a> </h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+                                    @foreach ($sgeneralThumbSmall as $item)
                                     <div class="image-title">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Germany claim first Nations League win</a> </h4>
+                                        <a href="#"><img src="{{asset($item->image)}}" alt="Notebook"></a>
+                                        <h4 class="heading-03"><a href="#">
+                                            @if (session()->get('lang')=='english')
+                                            {{Str::limit($item->title_en,40)}}
+                                            @else
+                                            {{Str::limit($item->title_hin,40)}}
+                                            @endif
+                                        </a> </h4>
                                     </div>
-                                    <div class="image-title">
-                                        <a href="#"><img src="{{asset('frontend/assets/img/news.jpg')}}" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Germany claim first Nations League win</a> </h4>
-                                    </div>
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
